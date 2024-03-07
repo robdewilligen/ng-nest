@@ -18,7 +18,9 @@
         <li *ngFor="let task of tasks">
             {{
                 task.name
-            }}<i class="fas fa-trash-alt" (click)="deleteTask(task.id)"></i>
+            }}
+            <i class="fas fa-trash-alt" (click)="deleteTask(task.id)"></i>
+            <i class="fa-solid fa-check" (click)="completeTask(task.id)"></i>
         </li>
     </ul>
     <p></p>

@@ -23,6 +23,11 @@ export class TaskService {
         });
     }
 
+    // TODO: CREATE COMPLETION FUNCTION
+    completeTask(id: number, completed: boolean) {
+        return this.http.patch(`${ this.host }/tasks/${ id }`, { completed: true })
+    }
+
     deleteTask(id: number) {
         return this.http.delete(`${ this.host }/tasks/${ id }`);
     }

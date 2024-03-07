@@ -41,30 +41,6 @@ export class AppComponent {
         this.getTasks();
     }
 
-    getTasks() {
-        console.log("getting tasks!")
-        this.taskService.getTasks().subscribe((data) => {
-            console.log(data);
-            this.tasks = data as Task[];
-        });
-    }
-
-    async addTask(task: string) {
-        console.log("adding task")
-        this.taskService.addTask(task).subscribe();
-        this.task = '';
-
-        setTimeout( () => this.reload(), 500)
-    }
-
-    deleteTask(id: number) {
-        this.taskService.deleteTask(id).subscribe((data) => {
-            console.log(data);
-        });
-
-        setTimeout( () => this.reload(), 500)
-    }
-
     reload() {
         this.getTasks();
         this.show = false;
@@ -73,4 +49,37 @@ export class AppComponent {
         })
     }
 
+    // READ tasks
+    getTasks() {
+        console.log("getting tasks!")
+        this.taskService.getTasks().subscribe((data) => {
+            console.log(data);
+            this.tasks = data as Task[];
+        });
+    }
+
+    // CREATE tasks
+    addTask(task: string) {
+        console.log("adding task")
+        this.taskService.addTask(task).subscribe();
+        this.task = '';
+
+        setTimeout( () => this.reload(), 500)
+    }
+
+    // PATCH tasks (complete)
+    completeTask(id: number, completed: boolean) {
+        this.taskService.completeTask(id, completed).subscribe((data) => {
+            console.log(data);
+        });
+    }
+
+    // DELETE Tasks
+    deleteTask(id: number) {
+        this.taskService.deleteTask(id).subscribe((data) => {
+            console.log(data);
+        });
+
+        setTimeout( () => this.reload(), 500)
+    }
 }

@@ -1,11 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
-
-export interface Tasks {
-    id: number;
-    name: string;
-    completed: boolean;
-}
+import { Tasks } from './interfaces/task.interface';
 
 @Injectable()
 export class AppService {
@@ -22,6 +17,20 @@ export class AppService {
     createTask(name: string): Tasks[] {
         const task = { id: this.tasks.length + 1, name, completed: false };
         this.tasks = [ ...this.tasks, { ...task } ];
+        fs.writeFileSync('task.json', JSON.stringify(this.tasks));
+        return this.tasks;
+    }
+    
+    completeTask(id: number, completed: boolean): Tasks[] {
+        // get the wanted task by ID
+        const index = this.getIndex(id);
+        
+        // read the task details and change boolean
+        const task = this.tasks[index];
+        const newTask = { "id": task.id, "name": task.name, "completed": completed }
+        
+        // insert it into the tasks array and write to file
+        this.tasks.splice(index, 1, newTask);
         fs.writeFileSync('task.json', JSON.stringify(this.tasks));
         return this.tasks;
     }

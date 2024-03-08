@@ -20,9 +20,15 @@
                 task.name
             }}
             <i class="fas fa-trash-alt" (click)="deleteTask(task.id)"></i>
-            <i class="fa-solid fa-check" (click)="completeTask(task.id)"></i>
+            <i class="fa-solid" [class.fa-x]="task.completed" [class.fa-check]="!task.completed" (click)="completeTask(task.id, !task.completed)"></i>
         </li>
     </ul>
+
+    <div *ngIf="!tasks.length" class="noTasks">
+        <span>There are no tasks to be shown at this time.</span>
+        <br>
+        <span>Please add one with the top textbox.</span>
+    </div>
     <p></p>
 </div>
 </body>

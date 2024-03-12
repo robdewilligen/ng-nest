@@ -1,4 +1,4 @@
-export class taskDto {
+export class TaskDto {
     id: number;
     name: string;
     completed: boolean;

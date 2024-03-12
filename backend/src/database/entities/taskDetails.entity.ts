@@ -9,7 +9,7 @@ export class TaskDetailsEntity {
     @Column("text")
     description: string
     
-    @OneToOne(() => TaskEntity)
+    @OneToOne(() => TaskEntity, (task) => task.details)
     @JoinColumn()
     task: TaskEntity
 }

@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import * as fs from "fs";
+import { AppDataSource } from "../database/index.database"
 import { Tasks } from "../interfaces/task.interface";
 import { TaskEntity as Task } from "../database/entities/task.entity";
-import { AppDataSource } from "../database/index.database"
-import * as fs from "fs";
+import { TaskDetailsEntity as TaskDetails } from "../database/entities/taskDetails.entity";
 
 @Injectable()
 export class TaskService {
@@ -21,7 +22,11 @@ export class TaskService {
     
     // GET postgresql tasks
     async getDbTasks() {
-        return await this.taskRepository.find();
+        return await this.taskRepository.find({
+            relations: {
+                details: true,
+            }
+        });
     }
     
     // GET completed postgresql tasks
@@ -50,6 +55,12 @@ export class TaskService {
         task.name = name;
         task.completed = false;
         
+        const details = new TaskDetails();
+        details.description = "a new description!";
+        
+        task.details = details;
+        
+        // saving the task will also save the details thanks to "cascading: true" in the entity
         await this.taskRepository.save(task);
         console.log(`Task has been saved, the ID is ${ task.id }`);
     }

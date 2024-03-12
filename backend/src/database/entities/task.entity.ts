@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { TaskDetailsEntity } from "./taskDetails.entity";
 
 @Entity()
 export class TaskEntity {
@@ -10,4 +11,13 @@ export class TaskEntity {
     
     @Column()
     completed: boolean;
+    
+    @OneToOne(
+        () => TaskDetailsEntity,
+        (details) => details.task,
+        {
+            cascade: true,
+        }
+    )
+    details: TaskDetailsEntity;
 }

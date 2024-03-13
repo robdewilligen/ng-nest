@@ -9,10 +9,12 @@ import { TaskDetailsEntity as TaskDetails } from "../database/entities/taskDetai
 export class TaskService {
     private tasks: Array<Tasks>;
     private taskRepository;
+    private detailsRepository;
     
     constructor() {
         this.tasks = JSON.parse(fs.readFileSync('./task.json', 'utf8'));
         this.taskRepository = AppDataSource.getRepository(Task);
+        this.detailsRepository = AppDataSource.getRepository(TaskDetails);
     }
     
     // GET json tasks
@@ -42,7 +44,7 @@ export class TaskService {
     };
     
     // CREATE json task
-    createTask(name: string): Tasks[] {
+    createTask( name: string ): Tasks[] {
         const task = { id: this.tasks.length + 1, name, completed: false };
         this.tasks = [ ...this.tasks, { ...task } ];
         fs.writeFileSync('task.json', JSON.stringify(this.tasks));
@@ -50,7 +52,7 @@ export class TaskService {
     }
     
     // CREATE postgresql task
-    async createDbTask(name: string) {
+    async createDbTask( name: string ) {
         const task = new Task();
         task.name = name;
         task.completed = false;
@@ -66,12 +68,12 @@ export class TaskService {
     }
     
     // PATCH json task to invert completed
-    completeTask(id: number, completed: boolean): Tasks[] {
+    completeTask( id: number, completed: boolean ): Tasks[] {
         // get the wanted task by ID
         const index = this.getIndex(id);
         
         // read the task details and change boolean
-        const task = this.tasks[index];
+        const task = this.tasks[ index ];
         const newTask = { "id": task.id, "name": task.name, "completed": completed }
         
         // insert it into the tasks array and write to file
@@ -81,7 +83,7 @@ export class TaskService {
     }
     
     // PATCH postgresql task to invert completed
-    async completeDbTask(id: number) {
+    async completeDbTask( id: number ) {
         const task = await this.taskRepository.findOneBy({
             id: id
         });
@@ -92,14 +94,14 @@ export class TaskService {
     
     
     // DELETE json task
-    deleteTask(id: number): Tasks[] {
+    deleteTask( id: number ): Tasks[] {
         const index = this.getIndex(id);
         this.tasks.splice(index, 1);
         return this.tasks;
     }
     
     // DELETE postgresql task
-    async deleteDbTask(id: number) {
+    async deleteDbTask( id: number ) {
         const task = await this.taskRepository.findOneBy({
             id: id,
         });
@@ -109,9 +111,9 @@ export class TaskService {
     
     
     // Helper function to get the index of an item in the array by ID
-    getIndex(id: number): number {
+    getIndex( id: number ): number {
         // Define the value of the required item
-        const value = this.tasks.find((task) => task.id == id);
+        const value = this.tasks.find(( task ) => task.id == id);
         
         // Define the index of the required item and delete it
         return this.tasks.indexOf(value);

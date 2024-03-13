@@ -14,9 +14,11 @@ export class TaskEntity {
     
     @OneToOne(
         () => TaskDetailsEntity,
-        (details) => details.task,
+        ( details ) => details.task,
         {
             cascade: true,
+            eager: true,
+            onDelete: "CASCADE",
         }
     )
     details: TaskDetailsEntity;

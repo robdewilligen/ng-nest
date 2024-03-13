@@ -9,7 +9,9 @@ export class TaskDetailsEntity {
     @Column("text")
     description: string
     
-    @OneToOne(() => TaskEntity, (task) => task.details)
+    @OneToOne(() => TaskEntity, ( task ) => task.details, {
+        onDelete: "CASCADE",
+    })
     @JoinColumn()
     task: TaskEntity
 }

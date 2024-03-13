@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     providers: [],
     standalone: true
 })
-export class AppComponent {
+export class DetailsComponent {
     title = 'frontend';
 
 }

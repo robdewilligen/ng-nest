@@ -71,7 +71,12 @@ ul li i {
     cursor: pointer;
 }
 
-p {
-    color: red;
-    text-align: center;
+p.item {
+    margin: 0;
+    padding: 0;
+    display: inline;
+
+    &:hover {
+        cursor: pointer;
+    }
 }

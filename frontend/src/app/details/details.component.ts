@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TaskService } from "../tasks.service";
 import { Tasks as Task } from '../interfaces/task.interface'
 
@@ -17,7 +17,6 @@ export class DetailsComponent {
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
         private taskService: TaskService,
     ) {
         this.task = [];
@@ -30,11 +29,6 @@ export class DetailsComponent {
 
             this.task = data as Task[];
         });
+        this.task = this.task[0];
     }
-
-    // goToItems(task: Task) {
-    //     const taskId = task ? task.id : null;
-    //     this.router.navigate([ 'details', { id: taskId } ]);
-    // }
-
 }

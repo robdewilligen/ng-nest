@@ -12,6 +12,6 @@ export class TaskDetailsEntity {
     @OneToOne(() => TaskEntity, ( task ) => task.details, {
         onDelete: "CASCADE",
     })
-    @JoinColumn()
+    @JoinColumn({ name: 'task_id', referencedColumnName: 'id' })
     task: TaskEntity
 }

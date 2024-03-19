@@ -15,10 +15,8 @@
         <span (click)="addTask(task)"><i class="fas fa-plus"></i></span>
     </div>
     <ul *ngIf="show">
-        <li *ngFor="let task of tasks" [routerLink]="['details', task.id]">
-            {{
-                task.name
-            }}
+        <li *ngFor="let task of tasks">
+            <p class="item" [routerLink]="['details', task.id]">{{ task.name }}</p>
             <i class="fas fa-trash-alt" (click)="deleteTask(task.id)"></i>
             <i class="fa-solid" [class.fa-x]="task.completed" [class.fa-check]="!task.completed"
                (click)="completeTask(task.id, !task.completed)"></i>

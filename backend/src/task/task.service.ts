@@ -33,7 +33,12 @@ export class TaskService {
     
     // GET task by ID
     async getDbTask(id: number) {
-        return await this.taskRepository.findOneBy({ id: id });
+        console.log("Returning task with ID: ", id);
+        return await this.taskRepository.find({
+            where: {
+                id: id,
+            },
+        })
     }
     
     // GET completed postgresql tasks

@@ -16,6 +16,10 @@ export class TaskService {
         return this.http.get(`${ this.host }/tasks`).pipe(map((res) => res));
     }
 
+    getTask(id: number) {
+        return this.http.get(`${ this.host }/tasks/${ id }`).pipe(map((res) => res));
+    }
+
     addTask(todo: string) {
         return this.http.post(`${ this.host }/tasks`, {
             name: todo,

@@ -8,6 +8,7 @@ export const routes: Routes =
     [
         {
             path: '',
+            title: 'App Root',
             component: AppComponent,
             children: [
                 {
@@ -24,11 +25,13 @@ export const routes: Routes =
         },
         {
             path: 'list',
+            title: 'list page',
             redirectTo: '',
             pathMatch: 'full'
         },
         {   // Wildcard route, should always be last in this order!
             path: '**',
+            title: 'Not found',
             component: NotFoundComponent
         }
     ];

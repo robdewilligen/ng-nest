@@ -16,6 +16,15 @@ export class TaskController {
         }
     }
     
+    @Get(':id')
+    getTodo(@Param('id') id: number) {
+        try {
+            return this.taskService.getDbTask(id);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
     @Post()
     createTodo(@Body() { name }: Tasks) {
         try {

@@ -3,7 +3,7 @@ import { TaskDetailsEntity } from "./taskDetails.entity";
 
 @Entity()
 export class TaskEntity {
-    @PrimaryGeneratedColumn() //Turn to @PrimaryGeneratedColumn() for auto-incremental ID's
+    @PrimaryGeneratedColumn()
     id: number;
     
     @Column("text")

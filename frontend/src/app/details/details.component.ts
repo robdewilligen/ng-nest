@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TaskService } from "../tasks.service";
+import { Tasks as Task } from '../interfaces/task.interface'
 
 @Component({
     selector: 'ng-details',
@@ -9,6 +12,29 @@ import { Component } from '@angular/core';
     standalone: true
 })
 export class DetailsComponent {
-    title = 'frontend';
+    title = 'details';
+    task: any;
+
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private taskService: TaskService,
+    ) {
+        this.task = [];
+    }
+
+    ngOnInit() {
+        const taskId = parseInt(<string>this.route.snapshot.paramMap.get('id'))
+        this.taskService.getTask(taskId).subscribe((data) => {
+            console.log('data', data);
+
+            this.task = data as Task[];
+        });
+    }
+
+    // goToItems(task: Task) {
+    //     const taskId = task ? task.id : null;
+    //     this.router.navigate([ 'details', { id: taskId } ]);
+    // }
 
 }

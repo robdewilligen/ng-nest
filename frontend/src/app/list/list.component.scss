@@ -7,12 +7,12 @@ body {
 .main {
     width: 500px;
     padding: 15p;
-    background-color: #ededed;
+    background-color: var(--color-background);
 }
 
 h1 {
     text-align: center;
-    color: #e69d17;
+    color: var(--color-primary);
     margin: 10px;
 }
 
@@ -34,7 +34,7 @@ input[type=text] {
     position: absolute;
     top: -10px;
     right: -4px;
-    background: #e69d17;
+    background: var(--color-primary);
     padding: 20px;
     display: flex;
     border-radius: 50%;
@@ -61,8 +61,8 @@ ul li {
     background-color: #fff;
     margin: 5px;
     padding: 10px;
-    border-right: 4px solid #e69d17;
-    border-left: 4px solid #e69d17;
+    border-right: 4px solid var(--color-primary);
+    border-left: 4px solid var(--color-primary);
 }
 
 ul li i {

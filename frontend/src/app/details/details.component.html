@@ -1,8 +1,28 @@
-<section>
-    <p>Details works!</p>
-    <p>ID = {{ task.id }}</p>
-    <p>Name = {{ task.name }}</p>
-    <p>IsCompleted = {{ task.completed }}</p>
-    <p>Details ID is = {{ task.details.id }}</p>
-    <p>Details are = {{ task.details.description }}</p>
+<head>
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <title>angular</title>
+</head>
+<section *ngIf="!isLoading">
+    <h1>Details works!</h1>
+    <div>
+        <p>ID = {{ task.id }}</p>
+        <p>Name = {{ task.name }}</p>
+        <p>IsCompleted = {{ task.completed }}</p>
+        <p>Details ID is = {{ task.details?.id }}</p>
+        <p>Details are = {{ task.details?.description }}</p>
+
+        <div>
+            <i class="fas fa-trash-alt" (click)="deleteTask(task.id)"></i>
+            <i class="fa-solid" [class.fa-x]="task.completed" [class.fa-check]="!task.completed"
+               (click)="completeTask(task.id, !task.completed)"></i>
+        </div>
+    </div>
+</section>
+
+<section *ngIf="isLoading">
+    <p>Oops, there is nothing to see here. Something must have gone wrong!</p>
 </section>
